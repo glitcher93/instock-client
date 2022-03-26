@@ -1,0 +1,12 @@
+@use './variables' as *;
+@use "./reset";
+@use "./setup";
+
+
+body {
+    font-family: $font;
+}
+
+ul {
+    list-style: none;
+}
