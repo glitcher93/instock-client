@@ -1,0 +1,23 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/functions' as *;
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $background-color-two;
+
+    &__copyright {
+        padding: toRem(40) 0;
+        font-size: $body-small;
+
+        @include tablet {
+            font-size: $responsive-body-small;
+        }
+
+        @include desktop {
+            padding: toRem(48) 0;
+        }
+    }
+}

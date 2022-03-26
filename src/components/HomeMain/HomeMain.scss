@@ -1,0 +1,21 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/functions' as *;
+
+.main {
+    background-color: $background-color-two;
+
+    &__wrapper {
+        padding: 0 $component-pad;
+
+        @include tablet {
+            padding: 0 toRem(32);
+        }
+
+        @include desktop {
+            padding: 0;
+            margin: 0 auto;
+            max-width: 1020px
+        }
+    }
+}
