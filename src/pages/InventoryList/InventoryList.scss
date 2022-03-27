@@ -43,6 +43,7 @@
 
     &__input {
         font-family: $font;
+        font-size: $body-medium;
         width: 100%;
         outline: none;
         height: toRem(36);
@@ -58,6 +59,7 @@
             margin: 0;
             height: toRem(38);
             width: toRem(185);
+            font-size: $responsive-body-medium;
         }
 
         @include desktop {
