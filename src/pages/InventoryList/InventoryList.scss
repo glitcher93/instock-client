@@ -1,0 +1,75 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/functions' as *;
+
+.inventory-list {
+
+    &__container {
+        padding: toRem(32) toRem(24) toRem(24);
+
+        @include tablet {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: toRem(32) toRem(32) toRem(36);
+        }
+
+        @include desktop {
+            padding: toRem(32) toRem(40) toRem(36);
+        }
+    }
+
+    &__header-container {
+        padding: 0 0 toRem(16);
+
+        @include tablet {
+            padding: 0;
+        }
+    }
+
+    &__title {
+        font-size: $page-header;
+
+        @include tablet {
+            font-size: $responsive-page-header;
+        }
+    }
+
+    &__form-container {
+        @include tablet {
+            display: flex;
+        }
+    }
+
+    &__input {
+        font-family: $font;
+        width: 100%;
+        outline: none;
+        height: toRem(36);
+        border: 1px solid $secondary-color-two;
+        border-radius: toRem(20);
+        padding: toRem(8) toRem(16);
+        margin: 0 0 toRem(16);
+        background-image: url('../../assets/icons/search-24px.svg');
+        background-repeat: no-repeat;
+        background-position: center right toRem(16);
+
+        @include tablet {
+            margin: 0;
+            height: toRem(38);
+            width: toRem(185);
+        }
+
+        @include desktop {
+            width: toRem(274);
+        }
+
+        &:focus {
+            border: 1px solid $primary-color-two;
+        }
+
+        &::placeholder {
+            color: $secondary-color-one;
+        }
+    }
+}
