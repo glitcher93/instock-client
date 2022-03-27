@@ -1,0 +1,29 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/functions' as *;
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 0 toRem(16);
+    height: toRem(36);
+    background-color: $primary-color-two;
+    outline: none;
+    border: none;
+    border-radius: toRem(20);
+    color: $primary-color-three;
+    font-size: $labels-links-buttons;
+    font-family: $font;
+
+    @include tablet {
+        width: auto;
+        margin-left: toRem(16);
+        height: toRem(38);
+    }
+
+    &__image {
+        width: toRem(13);
+    }
+}
