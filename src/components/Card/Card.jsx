@@ -1,4 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
+import InventoryList from '../../pages/InventoryList/InventoryList'
+import WarehouseList from '../../pages/WarehouseList'
 import './Card.scss'
 
 export default function Card() {
@@ -7,12 +9,12 @@ export default function Card() {
         className='card'
         >
             <Routes>
-                <Route path='/' />
-                <Route path='warehouses' />
+                <Route path='/' element={<WarehouseList />} />
+                <Route path='warehouses' element={<WarehouseList />} />
                 <Route path='warehouses/:id' />
                 <Route path='warehouses/add' />
                 <Route path='warehouses/edit/:id' />
-                <Route path='inventory' />
+                <Route path='inventory' element={<InventoryList />} />
                 <Route path='inventory/:id' />
                 <Route path='inventory/add' />
                 <Route path='inventory/edit/:id' />
