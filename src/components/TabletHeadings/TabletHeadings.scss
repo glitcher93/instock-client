@@ -1,0 +1,62 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/functions' as *;
+
+.tablet-headings {
+    display: none;
+
+    @include tablet {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: toRem(40);
+        background-color: $background-color-two;
+        padding: 0 toRem(32);
+    }
+
+    @include desktop {
+        padding: 0 toRem(40);
+    }
+
+    &__container {
+        display: flex;
+        width: 20%;
+
+        &--inventory {
+            width: 20%;
+        }
+
+        &--quantity {
+            width: 10%;
+        }
+
+        &--second-last {
+            width: 25%;
+        }
+        
+        &--second-last-inv {
+            width: 15%;
+        }
+
+        &--last {
+            width: 15%;
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+
+    &__heading {
+        font-size: $responsive-table-header;
+        color: $secondary-color-one;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    &__sort-icon {
+        width: toRem(12);
+        margin-left: toRem(8.94);
+    }
+}
+
+
+
