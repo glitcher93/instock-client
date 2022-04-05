@@ -1,7 +1,7 @@
 import './TabletHeadings.scss'
 import Sort from '../../assets/icons/sort-24px.svg';
 
-export default function TabletHeadings({ headings }) {
+export default function TabletHeadings({ headings, specialClasses }) {
 
     if (headings.length === 5) {
         return (
@@ -9,7 +9,7 @@ export default function TabletHeadings({ headings }) {
             className='tablet-headings'
             >
                 <div 
-                className="tablet-headings__container tablet-headings__container--inventory"
+                className="tablet-headings__container tablet-headings__container--item"
                 >
                     <p 
                     className="tablet-headings__heading"
@@ -23,7 +23,7 @@ export default function TabletHeadings({ headings }) {
                     />
                 </div>
                 <div 
-                className="tablet-headings__container tablet-headings__container--inventory"
+                className="tablet-headings__container tablet-headings__container--category"
                 >
                     <p 
                     className="tablet-headings__heading"
@@ -37,7 +37,7 @@ export default function TabletHeadings({ headings }) {
                     />
                 </div>
                 <div 
-                className="tablet-headings__container tablet-headings__container--inventory"
+                className="tablet-headings__container tablet-headings__container--status"
                 >
                     <p 
                     className="tablet-headings__heading"
@@ -51,7 +51,7 @@ export default function TabletHeadings({ headings }) {
                     />
                 </div>
                 <div 
-                className="tablet-headings__container tablet-headings__container--quantity tablet-headings__container--inventory"
+                className="tablet-headings__container tablet-headings__container--qty"
                 >
                     <p 
                     className="tablet-headings__heading"
@@ -65,7 +65,7 @@ export default function TabletHeadings({ headings }) {
                     />
                 </div>
                 <div 
-                className="tablet-headings__container tablet-headings__container--second-last-inv tablet-headings__container--inventory"
+                className="tablet-headings__container tablet-headings__container--warehouse-name"
                 >
                     <p
                     className="tablet-headings__heading"
@@ -79,7 +79,7 @@ export default function TabletHeadings({ headings }) {
                     />
                 </div>
                 <div 
-                className="tablet-headings__container tablet-headings__container--last tablet-headings__container--inventory"
+                className="tablet-headings__container tablet-headings__container--inventory-actions"
                 >
                     <p 
                     className="tablet-headings__heading"
@@ -96,7 +96,7 @@ export default function TabletHeadings({ headings }) {
             className='tablet-headings'
             >
                 <div 
-                className="tablet-headings__container"
+                className={`tablet-headings__container tablet-headings__container--warehouse ${specialClasses ? specialClasses[0] : ""}`}
                 >
                     <p 
                     className="tablet-headings__heading"
@@ -110,7 +110,7 @@ export default function TabletHeadings({ headings }) {
                     />
                 </div>
                 <div 
-                className="tablet-headings__container"
+                className={`tablet-headings__container tablet-headings__container--address ${specialClasses ? specialClasses[1] : ""}`}
                 >
                     <p 
                     className="tablet-headings__heading"
@@ -124,7 +124,7 @@ export default function TabletHeadings({ headings }) {
                     />
                 </div>
                 <div 
-                className="tablet-headings__container"
+                className={`tablet-headings__container tablet-headings__container--contact-name ${specialClasses ? specialClasses[2] : ""}`}
                 >
                     <p 
                     className="tablet-headings__heading"
@@ -138,7 +138,7 @@ export default function TabletHeadings({ headings }) {
                     />
                 </div>
                 <div 
-                className="tablet-headings__container tablet-headings__container--second-last"
+                className={`tablet-headings__container tablet-headings__container--contact-info ${specialClasses ? specialClasses[3] : ""}`}
                 >
                     <p
                     className="tablet-headings__heading"
@@ -152,7 +152,7 @@ export default function TabletHeadings({ headings }) {
                     />
                 </div>
                 <div 
-                className="tablet-headings__container tablet-headings__container--last"
+                className={`tablet-headings__container tablet-headings__container--actions ${specialClasses ? specialClasses[4] : ""}`}
                 >
                     <p 
                     className="tablet-headings__heading"
