@@ -7,6 +7,14 @@ body {
     font-family: $font;
 }
 
+button {
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+}
+
 ul {
     list-style: none;
 }
