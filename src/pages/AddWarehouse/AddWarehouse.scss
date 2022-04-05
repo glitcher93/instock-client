@@ -1,0 +1,19 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/functions' as *;
+
+.add-warehouse {
+
+    &__header-container {
+        display: flex;
+        align-items: center;
+        padding: toRem(32) toRem(28) toRem(24);
+        border-bottom: 1px solid $secondary-color-two;
+    }
+
+    &__title {
+        font-size: $page-header;
+        line-height: toRem(36);
+        padding-left: toRem(12);
+    }
+}
