@@ -20,29 +20,118 @@
 
     &__container {
         display: flex;
-        width: 20%;
 
-        &--inventory {
-            width: 20%;
-        }
+        &--warehouse {
+            @include tablet {
+                width: 23.9%;
+            }
 
-        &--quantity {
-            width: 10%;
-        }
-
-        &--second-last {
-            width: 25%;
-        }
-        
-        &--second-last-inv {
-            width: 15%;
+            @include desktop {
+                width: 29.5%;
+            }
         }
 
-        &--last {
-            width: 15%;
-            display: flex;
-            justify-content: flex-end;
+        &--address {
+            @include tablet {
+                width: 19.2%;
+            }
+
+            @include desktop {
+                width: 34.8%;
+            }
         }
+
+        &--contact-name {
+            @include tablet {
+                width: 19.4%;
+            }
+
+            @include desktop {
+                width: 23.2%;
+            }
+        }
+
+        &--contact-info {
+            @include tablet {
+                width: 32.2%;
+            }
+
+            @include desktop {
+                width: 23.2%;
+            }
+        }
+
+        &--actions {
+            @include tablet {
+                width: 6%;
+                display: flex;
+                justify-content: flex-end;
+            }
+
+            @include desktop {
+                width: 23.2%;
+            }
+        }
+
+        &--item {
+            @include tablet {
+                width: 29.5%;
+            }
+        }
+
+        &--category {
+            @include tablet {
+                width: 23.8%;
+            }
+        }
+
+        &--status {
+            @include tablet {
+                width: 23.9%;
+            }
+        }
+
+        &--qty {
+            @include tablet {
+                width: 12.2%;
+            }
+        }
+
+        &--inventory-actions {
+            @include tablet {
+                width: 20%;
+                display: flex;
+                justify-content: flex-end;
+            }
+        }
+
+        &--details-item {
+            @include tablet {
+                width: 29.5%;
+            }
+        }
+
+        &--details-category {
+            @include tablet {
+                width: 23.8%;
+            }
+        }
+
+        &--details-status {
+            @include tablet {
+                width: 35.6%;
+            }
+        }
+
+
+        &--details-actions {
+            @include tablet {
+                display: flex;
+                justify-content: flex-end;
+                width: 16%;
+            }
+        }
+
     }
 
     &__heading {
