@@ -1,0 +1,277 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/functions' as *;
+
+.item {
+    border-top: 1px solid $secondary-color-two;
+
+    &:hover {
+        background-color: rgba($color: $primary-color-two, $alpha: 0.07);
+    }
+
+    @include tablet {
+        display: flex;
+        align-items: center;
+        padding: toRem(27) toRem(32);
+        width: 100%;
+
+        &:nth-child(1) {
+            border: none;
+        }
+    }
+
+    @include desktop {
+        padding: toRem(18) toRem(40);
+    }
+
+    &__info-container {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        flex-grow: 1;
+        height: toRem(200);
+        padding: toRem(16) toRem(24) toRem(19);
+        width: 100%;
+        
+        @include tablet {
+            flex-direction: row;
+            flex-wrap: nowrap;
+            align-items: center;
+            height: auto;
+            padding: 0;
+        }
+
+        &--inventory {
+            height: toRem(180);
+
+            @include tablet {
+                height: auto;
+            }
+        }
+    }
+
+    &__info {
+        padding-bottom: toRem(16);
+        height: 50%;
+        width: 50%;
+
+        @include tablet {
+            width: auto;
+            height: auto;
+            padding: 0;
+        }
+
+        &--warehouse {
+            @include tablet {
+                width: 33%;
+            }
+
+            @include desktop {
+                width: 25%;
+            }
+        }
+
+        &--address {
+            @include tablet {
+                width: 26.6%;
+            }
+
+            @include desktop {
+                width: 30%;
+            }
+        }
+
+        &--contact-name {
+            @include tablet {
+                width: 26.7%;
+            }
+
+            @include desktop {
+                width: 20.3%;
+            }
+        }
+
+        &--contact-info {
+            @include tablet {
+                width: 35%;
+            }
+
+            @include desktop {
+                width: 21%;
+            }
+        }
+
+        &--inventory {
+            width: 50%;
+            height: auto;
+
+            &:nth-child(2) {
+                height: 60%;
+            }
+
+            @include tablet {
+                width: auto;
+
+                &:nth-child(2) {
+                    height: auto;
+                }
+            }
+        }
+
+        &--item {
+            @include tablet {
+                width: 26.5%;
+            }
+        }
+
+        &--category {
+            @include tablet {
+                width: 21.5%;
+            }
+        }
+
+        &--status {
+            @include tablet {
+                width: 21.2%;
+            }
+        }
+
+        &--qty {
+            @include tablet {
+                width: 11%;
+            }
+        }
+
+        &--item-special {
+            @include tablet {
+                width: 24.5%;
+            }
+
+            @include desktop {
+                width: 26%;
+            }
+        }
+
+        &--category-special {
+            @include tablet {
+                width: 19.5%;
+            }
+
+            @include desktop {
+                width: 21%;
+            }
+        }
+
+        &--status-special {
+            @include tablet {
+                width: 29.5%;
+            }
+
+            @include desktop {
+                width: 31.5%;
+            }
+        }
+
+        &--qty-special {
+            @include tablet {
+                width: 11%;
+            }
+
+            @include desktop {
+                
+            }
+        }
+    }
+
+    &__heading {
+        font-size: $body-small;
+        font-weight: 600;
+        width: 100%;
+        text-transform: uppercase;
+        color: $secondary-color-one;
+        padding-bottom: toRem(4);
+
+        @include tablet {
+            display: none;
+        }
+    }
+
+    &__body {
+        display: flex;
+        align-items: center;
+        font-size: $body-medium;
+        line-height: toRem(20);
+
+        @include tablet {
+            font-size: $responsive-body-medium;
+        }
+
+        &--address {
+            width: 62%;
+
+            @include tablet {
+                width: 77%;
+            }
+
+            @include desktop {
+                width: 84%;
+            }
+        }
+    }
+
+    &__link {
+        @extend .item__body;
+        font-weight: 600;
+        text-decoration: none;
+        color: $primary-color-two;
+
+        &--tablet {
+            display: none;
+
+            @include tablet {
+                display: flex;
+            }
+        }
+
+        &--inventory {
+            width: 35%;
+        }
+    }
+
+    &__actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 toRem(24) toRem(24);
+
+        @include tablet {
+            padding: 0
+        }
+
+        &--special {
+            @include tablet {
+                justify-content: flex-end;
+                width: 15%;
+            }
+        }
+
+        &--details-special {
+            @include tablet {
+                justify-content: flex-end;
+                width: 13%;
+            }
+        }
+
+        &--inventory-special {
+            @include tablet {
+                justify-content: flex-end;
+            }
+        }
+    }
+
+    &__action {
+        @include tablet {
+            margin-left: toRem(24);
+        }
+    }
+}
