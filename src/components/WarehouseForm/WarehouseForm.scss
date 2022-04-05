@@ -1,0 +1,131 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/functions' as *;
+
+.warehouse-form {
+
+    &__wrapper {
+        padding: 0 0 toRem(24);
+
+        @include tablet {
+            display: flex;
+            padding: toRem(24) 0;
+        }
+    }
+
+    &__container {
+        padding: 0 toRem(24);
+        width: 100%;
+
+        &:nth-child(1) {
+            padding-bottom: toRem(24);
+            border-bottom: 1px solid $secondary-color-two;
+        }
+
+        @include tablet {
+            padding: 0 toRem(32);
+
+            &:nth-child(1) {
+                padding: 0 toRem(32) 0;
+                border-bottom: none;
+                border-right: 1px solid $secondary-color-two;
+            }
+        }
+
+        @include desktop {
+            padding: 0 toRem(40);
+
+            &:nth-child(1) {
+                padding: 0 toRem(40);
+            }
+        }
+    }
+
+    &__sub-header {
+        font-size: $sub-header;
+        padding: toRem(16) 0;
+
+        @include tablet {
+            font-size: $responsive-sub-header;
+            padding: 0 0 toRem(32);
+        }
+    }
+
+    &__form-group {
+        display: flex;
+        flex-direction: column;
+        padding-bottom: toRem(16);
+        width: 100%;
+
+        &:nth-child(5) {
+            padding-bottom: 0;
+        }
+
+        @include tablet {
+            padding-bottom: toRem(24);
+
+            &:nth-child(5) {
+                padding-bottom: toRem(8);
+            }
+        }
+    }
+
+    &__label {
+        font-size: $labels-links-buttons;
+        font-weight: 600;
+        padding-bottom: toRem(4);
+
+        @include tablet {
+            font-size: $responsive-labels-links-buttons
+        }
+    }
+
+    &__input {
+        font-size: $body-medium;
+        font-family: $font;
+        border: 1px solid $secondary-color-two;
+        outline: none;
+        height: toRem(36);
+        border-radius: toRem(20);
+        padding: toRem(8) toRem(16);
+        width: 100%;
+
+        @include tablet {
+            font-size: $responsive-body-medium;
+            height: toRem(38);
+        }
+
+        &:focus {
+            outline: 1px solid $primary-color-two;
+        }
+    }
+
+    &__buttons {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: toRem(16) toRem(24);
+        background-color: $background-color-two;
+        width: 100%;
+
+        @include tablet {
+            justify-content: flex-end;
+            padding: toRem(16) toRem(32);
+        }
+
+        @include desktop {
+            justify-content: flex-end;
+            padding: toRem(16) toRem(40);
+        }
+    }
+
+    &__link {
+        width: 100%;
+        margin-right: toRem(17);
+
+        @include tablet {
+            width: auto;
+            margin-right: 0;
+        }
+    }
+}
