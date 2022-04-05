@@ -1,11 +1,11 @@
 import './Button.scss'
 
-export default function Button({ text, image, classes, altText }) {
+export default function Button({ text, image, altText, specialButton, specialClass }) {
 
     if (image) {
         return (
             <button
-            className={`button ${classes}`}
+            className={`button ${specialButton}`}
             >
                 <img 
                 src={image} 
@@ -13,7 +13,7 @@ export default function Button({ text, image, classes, altText }) {
                 className='button__image'
                 />
                 <p
-                className="button__text"
+                className={`button__text ${specialClass}`}
                 >
                     {text}
                 </p>
@@ -24,10 +24,10 @@ export default function Button({ text, image, classes, altText }) {
 
     return (
         <button
-        className={`button ${classes}`}
+        className={`button ${text === 'Cancel' ? "button--cancel" : ""}`}
         >
             <p
-            className="button__text"
+            className={`button__text`}
             >
                 {text}
             </p>
