@@ -37,7 +37,7 @@ function PageHeader() {
                             className='header__nav-item header__nav-item--left'
                             >
                                 <NavLink
-                                exact
+                                exact="true"
                                 to='/warehouses'
                                 className='header__nav-link'
                                 >
@@ -48,6 +48,7 @@ function PageHeader() {
                             className='header__nav-item'
                             >
                                 <NavLink
+                                exact="true"
                                 to='/inventory'
                                 className='header__nav-link'
                                 >
