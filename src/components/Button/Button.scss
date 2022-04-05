@@ -16,14 +16,44 @@
     color: $primary-color-three;
     font-size: $labels-links-buttons;
     font-family: $font;
+    font-weight: 600;
+
+    &--special {
+        padding: toRem(10.5);
+        border-radius: 50%;
+
+        @include tablet {
+            padding: toRem(8) toRem(16);
+            border-radius: toRem(20);
+        }
+    }
 
     @include tablet {
+        font-size: $responsive-labels-links-buttons;
         width: auto;
-        margin-left: toRem(16);
         height: toRem(38);
+        margin-left: toRem(16);
+    }
+
+    &--cancel {
+        background-color: $primary-color-three;
+        border: 1px solid $secondary-color-two;
+        color: $secondary-color-one;
     }
 
     &__image {
-        width: toRem(13);
+       width: toRem(15);
+    }
+
+    &__text {
+
+        &--special {
+            display: none;
+
+            @include tablet {
+                display: block;
+                padding-left: toRem(4);
+            }
+        }
     }
 }
