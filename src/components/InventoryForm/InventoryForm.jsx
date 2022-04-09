@@ -1,151 +1,358 @@
 import "./InventoryForm.scss";
 import Button from "../Button"
 import Add from '../../assets/icons/add_white_24dp.svg';
-import { Link } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getAllWarehouses, editItem, postNewItem } from "../../utils/apiFunctions";
+import ErrorMessage from "../ErrorMessage";
 
 const InventoryForm = ({ item }) => {
-  return (
-    <form 
-    className="inventory-form"
-    >
-        <div className="inventory-form__wrapper">
-            <div
-            className="inventory-form__container"
-            >
-                <h2 
-                className="inventory-form__sub-header"
+
+    const { itemId } = useParams();
+    const navigate = useNavigate();
+    
+    const [itemTitle, setItemTitle] = useState("");
+    const [itemDescription, setItemDescription] = useState("");
+    const [itemCategory, setItemCategory] = useState("");
+    const [itemStatus, setItemStatus] = useState("");
+    const [itemQuantity, setItemQuantity] = useState(0);
+    const [itemWarehouse, setItemWarehouse] = useState("");
+    const [warehouses, setWarehouses] = useState([]);
+    const [nameRequired, setNameRequired] = useState(false);
+    const [descriptionRequired, setDescriptionRequired] = useState(false);
+    const [categoryRequired, setCategoryRequired] = useState(false);
+    const [statusRequired, setStatusRequired] = useState(false);
+    const [quantityRequired, setQuantityRequired] = useState(false);
+    const [warehouseNameRequired, setWarehouseNameRequired] = useState(false);
+    const [show, setShow] = useState(true);
+
+    useEffect(() => {
+        if (itemId) {
+            const { itemName, description, category, status, quantity, warehouseName } = item;
+            setItemTitle(itemName)
+            setItemDescription(description)
+            setItemCategory(category)
+            setItemStatus(status)
+            setItemQuantity(quantity)
+            setItemWarehouse(warehouseName)
+        }
+        getAllWarehouses(setWarehouses);
+    }, [item, itemId])
+
+    const handleEdit = (e, id) => {
+        e.preventDefault();
+
+        const updatedItem = {
+            itemName: itemTitle,
+            description: itemDescription,
+            category: itemCategory,
+            status: itemStatus,
+            quantity: itemStatus === "In Stock" ? parseInt(itemQuantity) : 0,
+            warehouseName: itemWarehouse
+        }
+
+        editItem(id, updatedItem);
+
+        setTimeout(() => {
+            navigate('/inventory')
+        }, 3000)
+    }
+
+    const handleAdd = (e) => {
+        e.preventDefault();
+
+        if (!itemTitle) {
+            setNameRequired(true);
+        }
+
+        if (!itemDescription) {
+            setDescriptionRequired(true);
+        }
+
+        if (!itemCategory) {
+            setCategoryRequired(true);
+        }
+
+        if (!itemStatus) {
+            setStatusRequired(true);
+        }
+
+        if (!itemQuantity) {
+            setQuantityRequired(true);
+        }
+
+        if (!itemWarehouse) {
+            setWarehouseNameRequired(true);
+        }
+
+        if (!itemTitle || 
+            !itemDescription || 
+            !itemCategory ||
+            !itemStatus ||
+            !itemQuantity || 
+            !itemWarehouse) {
+            alert("One or more fields are not filled out");
+            return;
+        }
+
+        const newItem = {
+            itemName: itemTitle,
+            description: itemDescription,
+            category: itemCategory,
+            status: itemStatus,
+            quantity: itemStatus === "In Stock" ? parseInt(itemQuantity) : 0,
+            warehouseName: itemWarehouse
+        }
+
+        postNewItem(newItem);
+
+        setTimeout(() => {
+            navigate('/inventory')
+        }, 3000)
+    }
+
+    const handleOnChange = (e) => {
+        const { name: inputName, value } = e.target
+        
+        switch (inputName) {
+            case "itemName":
+                setItemTitle(value);
+                setNameRequired(false)
+                break;
+            case "description":
+                setItemDescription(value);
+                setDescriptionRequired(false)
+                break;
+            case "category":
+                setItemCategory(value);
+                setCategoryRequired(false)
+                break;
+            case "status":
+                setItemStatus( value);
+                setStatusRequired(false)
+                break;
+            case "quantity":
+                setItemQuantity(value);
+                setQuantityRequired(false);
+                break;
+            case "warehouseName":
+                setItemWarehouse(value);
+                setWarehouseNameRequired(false);
+                break;
+            default: 
+                return;
+        }
+    }
+
+    return (
+        <form 
+        className="inventory-form"
+        onSubmit={item ? (e) => handleEdit(e, itemId) : (e) => handleAdd(e)}
+        >
+            <div className="inventory-form__wrapper">
+                <div
+                className="inventory-form__container"
                 >
-                    Item Details
-                </h2>
-                <div 
-                className="inventory-form__form-group"
-                >
-                    <label 
-                    htmlFor="itemName" 
-                    className="inventory-form__label"
+                    <h2 
+                    className="inventory-form__sub-header"
                     >
-                        Item Name
-                    </label>
-                    <input 
-                    type="text"
-                    id="itemName" 
-                    name="itemName"
-                    className="inventory-form__input"
-                    placeholder={item ? item.itemName : "Item Name"} 
-                    />
+                        Item Details
+                    </h2>
+                    <div 
+                    className="inventory-form__form-group"
+                    >
+                        <label 
+                        htmlFor="itemName" 
+                        className="inventory-form__label"
+                        >
+                            Item Name
+                        </label>
+                        <input 
+                        type="text"
+                        id="itemName" 
+                        name="itemName"
+                        value={itemTitle}
+                        onChange={handleOnChange}
+                        className={`inventory-form__input ${nameRequired ? "inventory-form__input--error" : ""}`}
+                        placeholder="Item Name"
+                        />
+                        {nameRequired && <ErrorMessage />}
+                    </div>
+                    <div 
+                    className="inventory-form__form-group"
+                    >
+                        <label 
+                        htmlFor="description" 
+                        className="inventory-form__label"
+                        >
+                            Description
+                        </label>
+                        <textarea 
+                        className={`inventory-form__input inventory-form__input--textarea ${descriptionRequired ? "inventory-form__input--error" : ""}`}
+                        id="description"
+                        name="description"
+                        defaultValue={item ? itemDescription : itemDescription}
+                        onChange={handleOnChange}
+                        placeholder="Please enter a brief item description..." 
+                        ></textarea>
+                        {descriptionRequired && <ErrorMessage />}
+                    </div>
+                    <div 
+                    className="inventory-form__form-group"
+                    >
+                        <label 
+                        htmlFor="category" 
+                        className="inventory-form__label"
+                        >
+                            Category
+                        </label>
+                        <select 
+                        className={`inventory-form__input inventory-form__input--select ${categoryRequired ? "inventory-form__input--error" : ""}`}
+                        id="category"
+                        name="category"
+                        onChange={handleOnChange}
+                        defaultValue="" 
+                        >
+                            <option value="" disabled>{item ? itemCategory : "Please Select"}</option>
+                            <option value="Electronics">Electronics</option>
+                            <option value="Gear">Gear</option>
+                            <option value="Apparel">Apparel</option>
+                            <option value="Accessories">Accessories</option>
+                            <option value="Health">Health</option>
+                        </select>
+                        {categoryRequired && <ErrorMessage />}
+                    </div>
                 </div>
                 <div 
-                className="inventory-form__form-group"
+                className="inventory-form__container"
                 >
-                    <label 
-                    htmlFor="description" 
-                    className="inventory-form__label"
+                    <h2 
+                    className="inventory-form__sub-header"
                     >
-                        Description
-                    </label>
-                    <textarea 
-                    className="inventory-form__input inventory-form__input--textarea"
-                    id="description"
-                    name="description"
-                    placeholder={
-                        item ? item.description : "Please enter a brief item description..."
-                    } 
-                    />
-                </div>
-                <div 
-                className="inventory-form__form-group"
-                >
-                    <label 
-                    htmlFor="category" 
-                    className="inventory-form__label"
+                        Item Availability
+                    </h2>
+                    <fieldset 
+                    className="inventory-form__form-group"
                     >
-                        Category
-                    </label>
-                    <select 
-                    className="inventory-form__input inventory-form__input--select"
-                    id="category"
-                    name="category" 
+                        <legend 
+                        className="inventory-form__label"
+                        >
+                            Status
+                        </legend>
+                        <div
+                        className="inventory-form__radio-container"
+                        >
+                            <div 
+                            className="inventory-form__radio-group"
+                            >
+                                <input 
+                                type="radio" 
+                                className="inventory-form__input--radio"
+                                id="in-stock"
+                                name="status"
+                                onChange={handleOnChange}
+                                value="In Stock"
+                                onClick={() => setShow(true)}
+                                checked={itemStatus === 'In Stock' ? true : false}
+                                />
+                                <label 
+                                htmlFor="in-stock"
+                                className="inventory-form__label inventory-form__label--radio"
+                                >
+                                    In Stock
+                                </label>
+                            </div>
+                            <div 
+                            className="inventory-form__radio-group"
+                            >
+                                <input 
+                                type="radio" 
+                                className="inventory-form__input--radio"
+                                id="out-of-stock"
+                                name="status"
+                                onChange={handleOnChange}
+                                onClick={() => setShow(false)}
+                                value="Out of Stock"
+                                checked={itemStatus === 'Out of Stock' ? true : false}
+                                />
+                                <label 
+                                htmlFor="out-of-stock"
+                                className="inventory-form__label inventory-form__label--radio"
+                                >
+                                    Out of Stock
+                                </label>
+                            </div>
+                        </div>
+                        {statusRequired && <ErrorMessage />}
+                    </fieldset>
+                    {show ? 
+                    <div 
+                    className="inventory-form__form-group"
                     >
-                    </select>
+                        <label 
+                        htmlFor="quantity" 
+                        className="inventory-form__label">
+                            Quantity
+                        </label>
+                        <input 
+                        type="number" 
+                        className={`inventory-form__input ${quantityRequired ? "inventory-form__input--error" : ""}`}
+                        id="quantity"
+                        name="quantity"
+                        onChange={handleOnChange}
+                        value={itemQuantity}
+                        min={0}
+                        placeholder={0}
+                        />
+                        {quantityRequired && <ErrorMessage />}
+                    </div> : null
+                    }
+                    <div 
+                    className="inventory-form__form-group"
+                    >
+                        <label 
+                        htmlFor="warehouseName" 
+                        className="inventory-form__label"
+                        >
+                            Warehouse
+                        </label>
+                        <select 
+                        className={`inventory-form__input inventory-form__input--select ${warehouseNameRequired ? "inventory-form__input--error" : ""}`}
+                        id="warehouseName"
+                        name="warehouseName"
+                        defaultValue=""
+                        >
+                            <option value="" disabled>{item ? itemWarehouse : "Please Select"}</option>
+                            {warehouses.map(warehouse => {
+                                return <option 
+                                        key={warehouse.id}
+                                        >
+                                            {warehouse.name}
+                                        </option>
+                            })}
+                        </select>
+                        {warehouseNameRequired && <ErrorMessage />}
+                    </div>
                 </div>
             </div>
             <div 
-            className="inventory-form__container"
+            className="inventory-form__buttons"
             >
-                <h2 
-                className="inventory-form__sub-header"
+                <Link
+                to='/inventory'
+                className="inventory-form__link"
                 >
-                    Item Availability
-                </h2>
-                <div 
-                className="inventory-form__form-group"
-                >
-                    <label 
-                    htmlFor="status" 
-                    className="inventory-form__label"
-                    >
-                        Status
-                    </label>
-                    <input 
-                    type="text" 
-                    className="inventory-form__input"
-                    id="status"
-                    name="status"
+                    <Button 
+                    text="Cancel"
                     />
-                </div>
-                <div 
-                className="inventory-form__form-group"
-                >
-                    <label 
-                    htmlFor="quantity" 
-                    className="inventory-form__label">
-                        Quantity
-                    </label>
-                    <input 
-                    type="number" 
-                    className="inventory-form__input"
-                    id="quantity"
-                    name="quantity"
-                    min={0}
-                    placeholder={item ? item.quantity : 0}
-                    />
-                </div>
-                <div 
-                className="inventory-form__form-group"
-                >
-                    <label 
-                    htmlFor="warehouseName" 
-                    className="inventory-form__label"
-                    >
-                        Warehouse
-                    </label>
-                    <select 
-                    className="inventory-form__input inventory-form__input--select" 
-                    id="warehouseName"
-                    name="warehouseName"
-                    >
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div 
-        className="inventory-form__buttons"
-        >
-            <Link
-            to='/'
-            className="inventory-form__link"
-            >
+                </Link>
                 <Button 
-                text="Cancel"
+                text={item ? "Save" : "Add Item"}
+                image={item ? false : Add}
                 />
-            </Link>
-            <Button 
-            text={item ? "Save" : "Add Item"}
-            image={item ? "" : Add}
-            />
-        </div>
-    </form>
-  );
+            </div>
+        </form>
+    );
 };
 
 export default InventoryForm;
