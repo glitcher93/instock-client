@@ -2,69 +2,97 @@ import Button from '../../components/Button';
 import './WarehouseList.scss';
 import Add from '../../assets/icons/add_white_24dp.svg';
 import TabletHeadings from '../../components/TabletHeadings';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
 import ItemList from '../../components/ItemList/ItemList';
 import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { deleteWarehouse, getAllWarehouses } from '../../utils/apiFunctions';
+import DeleteModal from '../../components/DeleteModal';
 
 export default function WarehouseList() {
 
-    const [warehouses, setWarehouses] = useState([])
+    const [warehouses, setWarehouses] = useState([]);
+    const [show, setShow] = useState(false);
+    const [warehouseInfo, setWarehouseInfo] = useState({
+        id: "",
+        name: ""
+    })
 
     useEffect(() => {
-        axios
-            .get('http://localhost:8080/warehouses')
-            .then((response) => {
-                setWarehouses(response.data)
-            })
-            .catch(err => console.log(err))
+        getAllWarehouses(setWarehouses)
     }, [])
 
+    const handleClose = () => {
+        setShow(false);
+    }
+
+    const handleDeleteWarehouse = (id) => {
+        deleteWarehouse(id, setWarehouses)
+        setShow(false);
+    }
+
     return (
-        <section
-        className='warehouse-list'
+        <main
+        className='main'
         >
-            <div
-            className='warehouse-list__container'
+            <div 
+            className='main__wrapper'
             >
-                <div
-                className='warehouse-list__header-container'
-                >
-                    <h1
-                    className='warehouse-list__title'
+                <div className="card">
+                    <section
+                    className='warehouse-list'
                     >
-                        Warehouses
-                    </h1>
-                </div>
-                <div
-                className='warehouse-list__form-container'
-                >
-                    <form
-                    className='warehouse-list__form'
-                    >
-                        <input 
-                        type="text"
-                        placeholder="Search..."
-                        className='warehouse-list__input'
+                        <div
+                        className='warehouse-list__container'
+                        >
+                            <div
+                            className='warehouse-list__header-container'
+                            >
+                                <h1
+                                className='warehouse-list__title'
+                                >
+                                    Warehouses
+                                </h1>
+                            </div>
+                            <div
+                            className='warehouse-list__form-container'
+                            >
+                                <form
+                                className='warehouse-list__form'
+                                >
+                                    <input 
+                                    type="text"
+                                    placeholder="Search..."
+                                    className='warehouse-list__input'
+                                    />
+                                </form>
+                                <Link 
+                                to='/warehouses/add'
+                                className='warehouse-list__link'
+                                >
+                                    <Button 
+                                    text='Add New Warehouse' 
+                                    image={Add} 
+                                    />
+                                </Link>
+                            </div>
+                        </div>
+                        <TabletHeadings 
+                        headings={['Warehouse', 'Address', 'Contact Name', 'Contact Information']}
                         />
-                    </form>
-                    <Link 
-                    to='/warehouses/add'
-                    className='warehouse-list__link'
-                    >
-                        <Button 
-                        text='Add New Warehouse' 
-                        image={Add} 
+                        <ItemList 
+                        warehouses={warehouses}
+                        setShow={setShow}
+                        setWarehouseInfo={setWarehouseInfo}
                         />
-                    </Link>
+                    </section>
                 </div>
+                <DeleteModal 
+                show={show}
+                handleClose={handleClose}
+                warehouseInfo={warehouseInfo}
+                handleDeleteWarehouse={handleDeleteWarehouse}
+                />
             </div>
-            <TabletHeadings 
-            headings={['Warehouse', 'Address', 'Contact Name', 'Contact Information']}
-            />
-            <ItemList 
-            warehouses={warehouses}
-            />
-        </section>
+        </main>
     )
 }
