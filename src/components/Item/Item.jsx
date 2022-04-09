@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom';
 import Trash from '../../assets/icons/delete_outline-24px.svg';
 import Edit from '../../assets/icons/edit-24px.svg';
 
-export default function Item({ warehouse, item }) {
-
+export default function Item({ warehouse, item, setShow, setWarehouseInfo, setItemInfo }) {
 
     if (item) {
         const { id, warehouseName, itemName, category, status, quantity } = item;
@@ -100,6 +99,14 @@ export default function Item({ warehouse, item }) {
                     <img 
                     src={Trash} 
                     alt="Delete"
+                    onClick={() => {
+                        setShow(true);
+                        setItemInfo({
+                            id: id,
+                            name: itemName
+                        });
+                    }}
+                    className="item__action--delete"
                     />
                     <Link
                     to={`/inventory/edit/${id}`}
@@ -197,6 +204,14 @@ export default function Item({ warehouse, item }) {
                     <img 
                     src={Trash} 
                     alt="Delete"
+                    onClick={() => {
+                        setShow(true);
+                        setWarehouseInfo({
+                            id: id,
+                            name: name
+                        });
+                    }}
+                    className="item__action--delete"
                     />
                     <Link
                     to={`/warehouses/edit/${id}`}
