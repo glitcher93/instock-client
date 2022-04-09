@@ -70,6 +70,26 @@
         }
     }
 
+    &__radio-container {
+        display: flex;
+        justify-content: space-between;
+        width: 80%;
+
+        @include tablet {
+            justify-content: flex-start;
+            width: auto;
+        }
+    }
+
+    &__radio-group {
+        display: flex;
+        align-items: center;
+
+        @include tablet {
+            padding-right: toRem(40);
+        }
+    }
+
     &__label {
         font-size: $labels-links-buttons;
         font-weight: 600;
@@ -77,6 +97,11 @@
 
         @include tablet {
             font-size: $responsive-labels-links-buttons
+        }
+
+        &--radio {
+            font-weight: 400;
+            padding: 0;
         }
     }
 
@@ -97,6 +122,12 @@
 
         &--textarea {
             height: toRem(120);
+            resize: none;
+        }
+
+        &--radio {
+            width: toRem(16);
+            margin-right: toRem(8);
         }
 
         &--select {
@@ -104,6 +135,10 @@
             background-image: url('../../assets/icons/arrow_drop_down-24px.svg');
             background-repeat: no-repeat;
             background-position: center right 16px;
+        }
+
+        &--error {
+            border: 1px solid #C94515;
         }
 
         &:focus {
