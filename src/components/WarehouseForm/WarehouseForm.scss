@@ -98,6 +98,10 @@
         &:focus {
             outline: 1px solid $primary-color-two;
         }
+
+        &--error {
+            border: 1px solid #C94515;
+        }
     }
 
     &__buttons {
