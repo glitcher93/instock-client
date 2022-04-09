@@ -41,6 +41,11 @@
         color: $secondary-color-one;
     }
 
+    &--delete {
+        background-color: #C94515;
+        margin-left: toRem(17);
+    }
+
     &__image {
        width: toRem(15);
     }
