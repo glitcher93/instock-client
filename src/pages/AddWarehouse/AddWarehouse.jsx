@@ -5,28 +5,40 @@ import WarehouseForm from '../../components/WarehouseForm/WarehouseForm';
 
 const AddWarehouse = () => {
     return ( 
-        <section
-        className="add-warehouse"
+        <main 
+        className="main"
         >
-            <div
-            className="add-warehouse__header-container"
+            <div 
+            className="main__wrapper"
             >
-                <Link
-                to='/'
+                <div 
+                className="card"
                 >
-                    <img 
-                    src={arrow} 
-                    alt="Go Back" 
-                    />
-                </Link>
-                <h1
-                className="add-warehouse__title"
-                >
-                    Add New Warehouse
-                </h1>
+                    <section
+                    className="add-warehouse"
+                    >
+                        <div
+                        className="add-warehouse__header-container"
+                        >
+                            <Link
+                            to='/'
+                            >
+                                <img 
+                                src={arrow} 
+                                alt="Go Back" 
+                                />
+                            </Link>
+                            <h1
+                            className="add-warehouse__title"
+                            >
+                                Add New Warehouse
+                            </h1>
+                        </div>
+                        <WarehouseForm />
+                    </section>
+                </div>
             </div>
-            <WarehouseForm />
-        </section>
+        </main>
      );
 }
  
