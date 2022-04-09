@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Trash from '../../assets/icons/delete_outline-24px.svg';
 import Edit from '../../assets/icons/edit-24px.svg';
 
-const DetailItem = ({ item }) => {
+const DetailItem = ({ item, setShow, setWarehouseItemInfo }) => {
 
     const { id, itemName, category, status, quantity } = item;
 
@@ -83,6 +83,14 @@ const DetailItem = ({ item }) => {
                 <img 
                 src={Trash} 
                 alt="Delete"
+                onClick={() => {
+                    setShow(true);
+                    setWarehouseItemInfo({
+                        id: id,
+                        name: itemName
+                    });
+                }}
+                className="item__action--delete"
                 />
                 <Link
                 to={`/inventory/edit/${id}`}
