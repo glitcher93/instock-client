@@ -42,7 +42,7 @@
         }
 
         &--inventory {
-            height: toRem(180);
+            height: toRem(200);
 
             @include tablet {
                 height: auto;
@@ -272,6 +272,10 @@
     &__action {
         @include tablet {
             margin-left: toRem(24);
+        }
+
+        &--delete {
+            cursor: pointer
         }
     }
 }
