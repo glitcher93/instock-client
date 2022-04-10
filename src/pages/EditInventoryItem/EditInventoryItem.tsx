@@ -4,12 +4,13 @@ import arrow from "../../assets/icons/arrow_back-24px.svg";
 import InventoryForm from '../../components/InventoryForm/InventoryForm';
 import { useEffect, useState } from 'react';
 import { getSingleItem } from '../../utils/apiFunctions';
+import { ItemStateObj } from '../../utils/interfaces';
 
 const EditInventoryItem = () => {
 
     const { itemId } = useParams();
 
-    const [item, setItem] = useState({})
+    const [item, setItem] = useState<ItemStateObj>()
 
     useEffect(() => {
         getSingleItem(itemId!, setItem);
