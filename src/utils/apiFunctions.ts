@@ -13,7 +13,7 @@ export const getAllWarehouses = (stateFn: Dispatch<SetStateAction<WarehouseState
         .catch(err => console.log(err));
 }
 
-export const getSingleWarehouse = (stateFn: Dispatch<SetStateAction<WarehouseStateObject>>, stateFn2: Dispatch<SetStateAction<ContactObj>>, id: string ) => {
+export const getSingleWarehouse = (stateFn: Dispatch<SetStateAction<WarehouseStateObject | undefined>>, stateFn2: Dispatch<SetStateAction<ContactObj | undefined>>, id: string ) => {
     axios
         .get(`${apiURL}warehouses/${id}`)
         .then(res => {
@@ -59,7 +59,7 @@ export const getAllInventories = (stateFn: Dispatch<SetStateAction<ItemStateObj[
         .catch(err => console.log(err));
 }
 
-export const getSingleItem = (id: string, stateFn: Dispatch<SetStateAction<ItemStateObj>>) => {
+export const getSingleItem = (id: string, stateFn: Dispatch<SetStateAction<ItemStateObj | undefined>>) => {
     axios
         .get(`${apiURL}inventory/${id}`)
         .then(res => {
