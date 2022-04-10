@@ -363,14 +363,11 @@ define("pages/WarehouseDetails/WarehouseDetails", ["require", "exports", "react/
     DeleteModal_3 = __importDefault(DeleteModal_3);
     const WarehouseDetails = () => {
         const { warehouseId } = (0, react_router_dom_5.useParams)();
-        const [warehouse, setWarehouse] = (0, react_2.useState)({});
-        const [contact, setContact] = (0, react_2.useState)({});
+        const [warehouse, setWarehouse] = (0, react_2.useState)();
+        const [contact, setContact] = (0, react_2.useState)();
         const [warehouseInventory, setWarehouseInventory] = (0, react_2.useState)([]);
         const [show, setShow] = (0, react_2.useState)(false);
-        const [warehouseItemInfo, setWarehouseItemInfo] = (0, react_2.useState)({
-            id: "",
-            name: ""
-        });
+        const [warehouseItemInfo, setWarehouseItemInfo] = (0, react_2.useState)();
         (0, react_2.useEffect)(() => {
             (0, apiFunctions_2.getSingleWarehouse)(setWarehouse, setContact, warehouseId);
             (0, apiFunctions_2.getInventoryForWarehouse)(warehouseId, setWarehouseInventory);
@@ -586,8 +583,8 @@ define("pages/EditWarehouse/EditWarehouse", ["require", "exports", "react/jsx-ru
     WarehouseForm_2 = __importDefault(WarehouseForm_2);
     const EditWarehouse = () => {
         const { warehouseId } = (0, react_router_dom_8.useParams)();
-        const [warehouse, setWarehouse] = (0, react_4.useState)({});
-        const [contact, setContact] = (0, react_4.useState)({});
+        const [warehouse, setWarehouse] = (0, react_4.useState)();
+        const [contact, setContact] = (0, react_4.useState)();
         (0, react_4.useEffect)(() => {
             (0, apiFunctions_4.getSingleWarehouse)(setWarehouse, setContact, warehouseId);
         }, [warehouseId]);
@@ -644,7 +641,7 @@ define("pages/InventoryDetails/InventoryDetails", ["require", "exports", "react/
     Button_7 = __importDefault(Button_7);
     const InventoryDetails = () => {
         const { itemId } = (0, react_router_dom_10.useParams)();
-        const [item, setItem] = (0, react_6.useState)({});
+        const [item, setItem] = (0, react_6.useState)();
         (0, react_6.useEffect)(() => {
             (0, apiFunctions_6.getSingleItem)(itemId, setItem);
         }, [itemId]);
@@ -811,7 +808,7 @@ define("pages/EditInventoryItem/EditInventoryItem", ["require", "exports", "reac
     InventoryForm_2 = __importDefault(InventoryForm_2);
     const EditInventoryItem = () => {
         const { itemId } = (0, react_router_dom_13.useParams)();
-        const [item, setItem] = (0, react_8.useState)({});
+        const [item, setItem] = (0, react_8.useState)();
         (0, react_8.useEffect)(() => {
             (0, apiFunctions_8.getSingleItem)(itemId, setItem);
         }, [itemId]);
