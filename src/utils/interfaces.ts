@@ -59,15 +59,12 @@ export interface ItemStateObj {
 }
 
 export interface InvFormProp  {
-    item?: any
+    item?: ItemObj
 }
 
-export type WarehouseFormProps = {
-    warehouse?: any
-    contact?: any
-} | {
-    warehouse?: never
-    contact?: never
+export interface WarehouseFormProps {
+    warehouse?: WarehouseObject
+    contact?: ContactObj
 }
 
 export interface Info {
@@ -78,7 +75,7 @@ export interface Info {
 export interface DetailItemProps {
     item: ItemStateObj,
     setShow: Dispatch<SetStateAction<boolean>>
-    setWarehouseItemInfo: Dispatch<SetStateAction<Info>>
+    setWarehouseItemInfo: Dispatch<SetStateAction<Info | undefined>> | undefined
 }
 
 export interface ItemProps {
@@ -97,7 +94,7 @@ export interface ItemListProps {
     detail?: boolean
     setWarehouseInfo?: Dispatch<SetStateAction<Info>>
     setItemInfo?: Dispatch<SetStateAction<Info>>
-    setWarehouseItemInfo?: any
+    setWarehouseItemInfo?: Dispatch<SetStateAction<Info | undefined>>
 }
 
 export interface ButtonProps {
