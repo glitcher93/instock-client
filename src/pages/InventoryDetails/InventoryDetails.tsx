@@ -11,7 +11,7 @@ const InventoryDetails = () => {
 
     const { itemId } = useParams();
 
-    const [item, setItem] = useState<ItemStateObj>({} as ItemStateObj);
+    const [item, setItem] = useState<ItemStateObj | undefined>();
 
     useEffect(() => {
         getSingleItem(itemId!, setItem)
@@ -45,7 +45,7 @@ const InventoryDetails = () => {
                                 <h1
                                 className="inventory-details__title"
                                 >
-                                    {item.itemName}
+                                    {item!.itemName}
                                 </h1>
                             </div>
                             <div 
@@ -76,7 +76,7 @@ const InventoryDetails = () => {
                                     <p
                                     className='inventory-details__info'
                                     >
-                                        {item.description}
+                                        {item!.description}
                                     </p>
                                 </article>
                                 <article
@@ -90,7 +90,7 @@ const InventoryDetails = () => {
                                     <p
                                     className='inventory-details__info'
                                     >
-                                        {item.category}
+                                        {item!.category}
                                     </p>
                                 </article>
                             </div>
@@ -106,9 +106,9 @@ const InventoryDetails = () => {
                                         Status:
                                     </h2>
                                     <p
-                                    className={`inventory-details__info inventory-details__info--status ${item.status === "In Stock" ? "inventory-details__info--in" : "inventory-details__info--out"}`}
+                                    className={`inventory-details__info inventory-details__info--status ${item!.status === "In Stock" ? "inventory-details__info--in" : "inventory-details__info--out"}`}
                                     >
-                                        {item.status}
+                                        {item!.status}
                                     </p>
                                 </article>
                                 <article
@@ -122,7 +122,7 @@ const InventoryDetails = () => {
                                     <p
                                     className='inventory-details__info'
                                     >
-                                        {item.warehouseName}
+                                        {item!.warehouseName}
                                     </p>
                                 </article>
                                 <article
@@ -136,7 +136,7 @@ const InventoryDetails = () => {
                                     <p
                                     className='inventory-details__info'
                                     >
-                                        {item.quantity}
+                                        {item!.quantity}
                                     </p>
                                 </article>
                             </div>
