@@ -13,7 +13,7 @@ const EditWarehouse = () => {
     const [contact, setContact] = useState({});
 
     useEffect(() => {
-        getSingleWarehouse(setWarehouse, setContact, warehouseId)
+        getSingleWarehouse(setWarehouse, setContact, warehouseId!)
     }, [warehouseId])
 
     return (

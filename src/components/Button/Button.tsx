@@ -1,6 +1,7 @@
+import { ButtonProps } from '../../utils/interfaces';
 import './Button.scss'
 
-export default function Button({ text, image, altText, specialButton, specialClass, handleClose, warehouseInfo, itemInfo, warehouseItemInfo, handleDeleteItem, handleDeleteWarehouse, handleDeleteItemFromWarehouse }) {
+export default function Button({ text, image, altText, specialButton, specialClass, handleClose, warehouseInfo, itemInfo, warehouseItemInfo, handleDeleteItem, handleDeleteWarehouse, handleDeleteItemFromWarehouse }: ButtonProps) {
 
     const renderButton = () => {
         if (image) {
@@ -26,7 +27,7 @@ export default function Button({ text, image, altText, specialButton, specialCla
             return (
                 <button
                 className="button button--delete"
-                onClick={() => handleDeleteWarehouse(warehouseInfo.id)} 
+                onClick={() => handleDeleteWarehouse(warehouseInfo!.id)} 
                 >
                     <p
                     className="button__text"
@@ -42,7 +43,7 @@ export default function Button({ text, image, altText, specialButton, specialCla
             return (
                 <button
                 className="button button--delete"
-                onClick={() => handleDeleteItem(itemInfo.id)} 
+                onClick={() => handleDeleteItem(itemInfo!.id)} 
                 >
                     <p
                     className="button__text"
@@ -57,7 +58,7 @@ export default function Button({ text, image, altText, specialButton, specialCla
             return (
                 <button
                 className="button button--delete"
-                onClick={() => handleDeleteItemFromWarehouse(warehouseItemInfo.id)} 
+                onClick={() => handleDeleteItemFromWarehouse(warehouseItemInfo!.id)} 
                 >
                     <p
                     className="button__text"

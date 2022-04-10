@@ -39,7 +39,7 @@ const AddWarehouse = () => {
                 </div>
             </div>
         </main>
-     );
+    );
 }
- 
+
 export default AddWarehouse;

@@ -3,10 +3,13 @@ import Button from "../Button"
 import Add from '../../assets/icons/add_white_24dp.svg';
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { editWarehouse, postNewWarehouse } from "../../utils/apiFunctions";
-import { useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import ErrorMessage from "../ErrorMessage";
+import { WarehouseFormProps } from "../../utils/interfaces";
 
-const WarehouseForm = ({ warehouse, contact }) => {
+const WarehouseForm = (props: WarehouseFormProps) => {
+
+    const { warehouse, contact } = props;
 
     const { warehouseId } = useParams();
     const navigate = useNavigate();
@@ -28,7 +31,7 @@ const WarehouseForm = ({ warehouse, contact }) => {
     const [phoneRequired, setPhoneRequired] = useState(false);
     const [emailRequired, setEmailRequired] = useState(false)
 
-    const handleOnChange = (e) => {
+    const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name: inputName, value } = e.target
 
         switch (inputName) {
@@ -69,7 +72,7 @@ const WarehouseForm = ({ warehouse, contact }) => {
         }
     }
 
-    const handleEdit = (e, id) => {
+    const handleEdit = (e: FormEvent<HTMLFormElement>, id: string) => {
         e.preventDefault();
 
         const updatedWarehouse = {
@@ -92,7 +95,7 @@ const WarehouseForm = ({ warehouse, contact }) => {
         }, 3000)
     }
 
-    const handleAdd = (e) => {
+    const handleAdd = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if (!warehouseName) {
@@ -160,25 +163,22 @@ const WarehouseForm = ({ warehouse, contact }) => {
     }
 
     useEffect(() => {
-        if (warehouse) {
-            const { name, address, city, country} = warehouse;
-            const { name: contactName, position, phone, email } = contact;
-            setWarehouseName(name)
-            setWarehouseAddress(address)
-            setWarehouseCity(city)
-            setWarehouseCountry(country)
-            setContactPerson(contactName)
-            setContactPosition(position)
-            setContactPhone(phone)
-            setContactEmail(email)
+        if (warehouseId) {
+            setWarehouseName(warehouse!.name)
+            setWarehouseAddress(warehouse!.address)
+            setWarehouseCity(warehouse!.city)
+            setWarehouseCountry(warehouse!.country)
+            setContactPerson(contact!.name)
+            setContactPosition(contact!.position)
+            setContactPhone(contact!.phone)
+            setContactEmail(contact!.email)
         }
-    }, [warehouse, contact])
-
+    }, [warehouseId, contact, warehouse])
 
     return (
         <form 
         className="warehouse-form"
-        onSubmit={warehouse ? (e) => handleEdit(e, warehouseId) : (e) => handleAdd(e)}
+        onSubmit={warehouseId ? (e) => handleEdit(e, warehouseId) : (e) => handleAdd(e)}
         >
             <div className="warehouse-form__wrapper">
                 <div
@@ -371,8 +371,8 @@ const WarehouseForm = ({ warehouse, contact }) => {
                     />
                 </Link>
                 <Button 
-                text={warehouse ? "Save" : "Add Warehouse"}
-                image={warehouse ? "" : Add}
+                text={"Add Warehouse"}
+                image={Add}
                 altText="Add"
                 />
             </div>

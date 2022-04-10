@@ -12,7 +12,7 @@ const EditInventoryItem = () => {
     const [item, setItem] = useState({})
 
     useEffect(() => {
-        getSingleItem(itemId, setItem);
+        getSingleItem(itemId!, setItem);
     }, [itemId])
 
     return (

@@ -5,15 +5,16 @@ import edit from "../../assets/icons/edit_white-24px.svg";
 import { useEffect, useState } from 'react';
 import Button from '../../components/Button';
 import { getSingleItem } from '../../utils/apiFunctions';
+import { ItemStateObj } from '../../utils/interfaces';
 
 const InventoryDetails = () => {
 
     const { itemId } = useParams();
 
-    const [item, setItem] = useState({});
+    const [item, setItem] = useState<ItemStateObj>({} as ItemStateObj);
 
     useEffect(() => {
-        getSingleItem(itemId, setItem)
+        getSingleItem(itemId!, setItem)
     }, [itemId])
 
     return (

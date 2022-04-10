@@ -2,11 +2,14 @@ import "./InventoryForm.scss";
 import Button from "../Button"
 import Add from '../../assets/icons/add_white_24dp.svg';
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { getAllWarehouses, editItem, postNewItem } from "../../utils/apiFunctions";
 import ErrorMessage from "../ErrorMessage";
+import { InvFormProp, WarehouseStateObject } from "../../utils/interfaces";
 
-const InventoryForm = ({ item }) => {
+const InventoryForm = (props: InvFormProp) => {
+
+    const { item } = props
 
     const { itemId } = useParams();
     const navigate = useNavigate();
@@ -15,9 +18,9 @@ const InventoryForm = ({ item }) => {
     const [itemDescription, setItemDescription] = useState("");
     const [itemCategory, setItemCategory] = useState("");
     const [itemStatus, setItemStatus] = useState("");
-    const [itemQuantity, setItemQuantity] = useState(0);
+    const [itemQuantity, setItemQuantity] = useState("");
     const [itemWarehouse, setItemWarehouse] = useState("");
-    const [warehouses, setWarehouses] = useState([]);
+    const [warehouses, setWarehouses] = useState<WarehouseStateObject[]>([]);
     const [nameRequired, setNameRequired] = useState(false);
     const [descriptionRequired, setDescriptionRequired] = useState(false);
     const [categoryRequired, setCategoryRequired] = useState(false);
@@ -28,18 +31,17 @@ const InventoryForm = ({ item }) => {
 
     useEffect(() => {
         if (itemId) {
-            const { itemName, description, category, status, quantity, warehouseName } = item;
-            setItemTitle(itemName)
-            setItemDescription(description)
-            setItemCategory(category)
-            setItemStatus(status)
-            setItemQuantity(quantity)
-            setItemWarehouse(warehouseName)
+            setItemTitle(item!.itemName)
+            setItemDescription(item!.description)
+            setItemCategory(item!.category)
+            setItemStatus(item!.status)
+            setItemQuantity(String(item!.quantity))
+            setItemWarehouse(item!.warehouseName)
         }
         getAllWarehouses(setWarehouses);
     }, [item, itemId])
 
-    const handleEdit = (e, id) => {
+    const handleEdit = (e: FormEvent<HTMLFormElement>, id: string) => {
         e.preventDefault();
 
         const updatedItem = {
@@ -58,7 +60,7 @@ const InventoryForm = ({ item }) => {
         }, 3000)
     }
 
-    const handleAdd = (e) => {
+    const handleAdd = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if (!itemTitle) {
@@ -111,7 +113,7 @@ const InventoryForm = ({ item }) => {
         }, 3000)
     }
 
-    const handleOnChange = (e) => {
+    const handleOnChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement> ) => {
         const { name: inputName, value } = e.target
         
         switch (inputName) {
@@ -147,7 +149,7 @@ const InventoryForm = ({ item }) => {
     return (
         <form 
         className="inventory-form"
-        onSubmit={item ? (e) => handleEdit(e, itemId) : (e) => handleAdd(e)}
+        onSubmit={itemId ? (e) => handleEdit(e, itemId) : (e) => handleAdd(e)}
         >
             <div className="inventory-form__wrapper">
                 <div
@@ -302,7 +304,7 @@ const InventoryForm = ({ item }) => {
                         onChange={handleOnChange}
                         value={itemQuantity}
                         min={0}
-                        placeholder={0}
+                        placeholder={"0"}
                         />
                         {quantityRequired && <ErrorMessage />}
                     </div> : null

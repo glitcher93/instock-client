@@ -1,8 +1,9 @@
 import Button from '../Button';
 import './DeleteModal.scss';
 import close from '../../assets/icons/close-24px.svg';
+import { ModalProps } from '../../utils/interfaces';
 
-const DeleteModal = ({show, handleClose, warehouseInfo, warehouseItemInfo, itemInfo, handleDeleteWarehouse, handleDeleteItem, handleDeleteItemFromWarehouse }) => {
+const DeleteModal = ({show, handleClose, warehouseInfo, warehouseItemInfo, itemInfo, handleDeleteWarehouse, handleDeleteItem, handleDeleteItemFromWarehouse }: ModalProps) => {
 
     if (!show) {
         document.body.style.overflow = "unset"

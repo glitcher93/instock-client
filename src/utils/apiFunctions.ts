@@ -1,8 +1,10 @@
 import axios from "axios"
+import { Dispatch, SetStateAction } from "react";
+import { ContactObj, ItemObj, ItemStateObj, WarehouseObject, WarehouseStateObject } from "./interfaces";
 
 const apiURL = 'http://localhost:8080/'
 
-export const getAllWarehouses = (stateFn) => {
+export const getAllWarehouses = (stateFn: Dispatch<SetStateAction<WarehouseStateObject[]>>) => {
     axios
         .get(`${apiURL}warehouses`)
         .then(res => {
@@ -11,7 +13,7 @@ export const getAllWarehouses = (stateFn) => {
         .catch(err => console.log(err));
 }
 
-export const getSingleWarehouse = (stateFn, stateFn2, id) => {
+export const getSingleWarehouse = (stateFn: Dispatch<SetStateAction<WarehouseStateObject>>, stateFn2: Dispatch<SetStateAction<ContactObj>>, id: string ) => {
     axios
         .get(`${apiURL}warehouses/${id}`)
         .then(res => {
@@ -21,7 +23,7 @@ export const getSingleWarehouse = (stateFn, stateFn2, id) => {
         .catch(err => console.log(err));
 }
 
-export const postNewWarehouse = (warehouseObj) => {
+export const postNewWarehouse = (warehouseObj: WarehouseObject) => {
     axios
         .post(`${apiURL}warehouses`, warehouseObj)
         .then(() => {
@@ -30,7 +32,7 @@ export const postNewWarehouse = (warehouseObj) => {
         .catch(err => console.log('Something went wrong:' + err));
 }
 
-export const editWarehouse = (id, warehouseObj) => {
+export const editWarehouse = (id: string, warehouseObj: WarehouseObject) => {
     axios
         .patch(`${apiURL}warehouses/edit/${id}`, warehouseObj)
         .then(() => {
@@ -39,7 +41,7 @@ export const editWarehouse = (id, warehouseObj) => {
         .catch(err => console.log('Something went wrong:' + err));
 }
 
-export const deleteWarehouse = (id, stateFn) => {
+export const deleteWarehouse = (id: string, stateFn: Dispatch<SetStateAction<WarehouseStateObject[]>>) => {
     axios
         .delete(`${apiURL}warehouses/delete/${id}`)
         .then(() => {
@@ -48,7 +50,7 @@ export const deleteWarehouse = (id, stateFn) => {
         .catch(err => console.log('Something went wrong:' + err))
 }
 
-export const getAllInventories = (stateFn) => {
+export const getAllInventories = (stateFn: Dispatch<SetStateAction<ItemStateObj[]>>) => {
     axios
         .get(`${apiURL}inventory`)
         .then(res => {
@@ -57,7 +59,7 @@ export const getAllInventories = (stateFn) => {
         .catch(err => console.log(err));
 }
 
-export const getSingleItem = (id, stateFn) => {
+export const getSingleItem = (id: string, stateFn: Dispatch<SetStateAction<ItemStateObj>>) => {
     axios
         .get(`${apiURL}inventory/${id}`)
         .then(res => {
@@ -66,7 +68,7 @@ export const getSingleItem = (id, stateFn) => {
         .catch(err => console.log(err));
 }
 
-export const getInventoryForWarehouse = (id, stateFn) => {
+export const getInventoryForWarehouse = (id: string, stateFn: Dispatch<SetStateAction<ItemStateObj[]>>) => {
     axios
         .get(`${apiURL}inventory/warehouse/${id}`)
         .then(res => {
@@ -75,7 +77,7 @@ export const getInventoryForWarehouse = (id, stateFn) => {
         .catch(err => console.log(err));
 }
 
-export const postNewItem = (itemObj) => {
+export const postNewItem = (itemObj: ItemObj) => {
     axios
         .post(`${apiURL}inventory`, itemObj)
         .then(() => {
@@ -84,7 +86,7 @@ export const postNewItem = (itemObj) => {
         .catch(err => console.log('Something went wrong:' + err));
 }
 
-export const editItem = (id, itemObj) => {
+export const editItem = (id: string, itemObj: ItemObj) => {
     axios
         .patch(`${apiURL}warehouses/edit/${id}`, itemObj)
         .then(() => {
@@ -93,7 +95,7 @@ export const editItem = (id, itemObj) => {
         .catch(err => console.log('Something went wrong:' + err));
 }
 
-export const deleteItem = (id, stateFn) => {
+export const deleteItem = (id: string, stateFn: Dispatch<SetStateAction<ItemStateObj[]>>) => {
     axios
         .delete(`${apiURL}inventory/delete/${id}`)
         .then(() => {
@@ -102,7 +104,7 @@ export const deleteItem = (id, stateFn) => {
         .catch(err => console.log('Something went wrong:' + err));
 }
 
-export const deleteItemFromWarehouse = (itemId, warehouseId, stateFn) => {
+export const deleteItemFromWarehouse = (itemId: string, warehouseId: string, stateFn: Dispatch<SetStateAction<ItemStateObj[]>>) => {
     axios
         .delete(`${apiURL}inventory/delete/${itemId}`)
         .then(() => {

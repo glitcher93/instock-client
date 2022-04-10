@@ -3,8 +3,9 @@ import Chevron from '../../assets/icons/chevron_right-24px.svg';
 import { Link } from 'react-router-dom';
 import Trash from '../../assets/icons/delete_outline-24px.svg';
 import Edit from '../../assets/icons/edit-24px.svg';
+import { ItemProps } from '../../utils/interfaces';
 
-export default function Item({ warehouse, item, setShow, setWarehouseInfo, setItemInfo }) {
+export default function Item({ warehouse, item, setShow, setWarehouseInfo, setItemInfo }: ItemProps) {
 
     if (item) {
         const { id, warehouseName, itemName, category, status, quantity } = item;
@@ -101,7 +102,7 @@ export default function Item({ warehouse, item, setShow, setWarehouseInfo, setIt
                     alt="Delete"
                     onClick={() => {
                         setShow(true);
-                        setItemInfo({
+                        setItemInfo!({
                             id: id,
                             name: itemName
                         });
@@ -122,7 +123,7 @@ export default function Item({ warehouse, item, setShow, setWarehouseInfo, setIt
         )
     }
 
-    const { id, name, address, city, country, contact } = warehouse;
+    const { id, name, address, city, country, contact } = warehouse!;
 
     return (
         <li
@@ -206,7 +207,7 @@ export default function Item({ warehouse, item, setShow, setWarehouseInfo, setIt
                     alt="Delete"
                     onClick={() => {
                         setShow(true);
-                        setWarehouseInfo({
+                        setWarehouseInfo!({
                             id: id,
                             name: name
                         });

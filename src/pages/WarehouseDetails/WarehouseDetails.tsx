@@ -8,14 +8,15 @@ import TabletHeadings from '../../components/TabletHeadings';
 import ItemList from '../../components/ItemList';
 import { deleteItemFromWarehouse, getInventoryForWarehouse, getSingleWarehouse } from '../../utils/apiFunctions';
 import DeleteModal from '../../components/DeleteModal';
+import { ContactObj, ItemStateObj, WarehouseStateObject } from '../../utils/interfaces';
 
 const WarehouseDetails = () => {
 
     const { warehouseId } = useParams();
 
-    const [warehouse, setWarehouse] = useState({});
-    const [contact, setContact]  = useState({});
-    const [warehouseInventory, setWarehouseInventory] = useState([]);
+    const [warehouse, setWarehouse] = useState<WarehouseStateObject>({} as WarehouseStateObject);
+    const [contact, setContact]  = useState<ContactObj>({} as ContactObj);
+    const [warehouseInventory, setWarehouseInventory] = useState<ItemStateObj[]>([]);
     const [show, setShow] = useState(false);
     const [warehouseItemInfo, setWarehouseItemInfo] = useState({
         id: "",
@@ -23,16 +24,16 @@ const WarehouseDetails = () => {
     })
 
     useEffect(() => {
-        getSingleWarehouse(setWarehouse, setContact, warehouseId);
-        getInventoryForWarehouse(warehouseId, setWarehouseInventory)
+        getSingleWarehouse(setWarehouse, setContact, warehouseId!);
+        getInventoryForWarehouse(warehouseId!, setWarehouseInventory)
     }, [warehouseId])
 
     const handleClose = () => {
         setShow(false);
     }
 
-    const handleDeleteItemFromWarehouse = (id) => {
-        deleteItemFromWarehouse(id, warehouseId, setWarehouseInventory)
+    const handleDeleteItemFromWarehouse = (id: string) => {
+        deleteItemFromWarehouse(id, warehouseId!, setWarehouseInventory)
         setShow(false);
     }
 

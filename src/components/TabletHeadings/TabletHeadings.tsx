@@ -1,7 +1,10 @@
 import './TabletHeadings.scss'
 import Sort from '../../assets/icons/sort-24px.svg';
+import { TabletHeadingsProps } from '../../utils/interfaces';
 
-export default function TabletHeadings({ headings, specialClasses }) {
+export default function TabletHeadings(props: TabletHeadingsProps) {
+
+    const { headings, specialClasses } = props;
 
     if (headings.length === 5) {
         return (

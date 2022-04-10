@@ -2,8 +2,9 @@ import Chevron from '../../assets/icons/chevron_right-24px.svg';
 import { Link } from 'react-router-dom';
 import Trash from '../../assets/icons/delete_outline-24px.svg';
 import Edit from '../../assets/icons/edit-24px.svg';
+import { DetailItemProps } from '../../utils/interfaces';
 
-const DetailItem = ({ item, setShow, setWarehouseItemInfo }) => {
+const DetailItem = ({ item, setShow, setWarehouseItemInfo }: DetailItemProps) => {
 
     const { id, itemName, category, status, quantity } = item;
 
