@@ -86,7 +86,7 @@ const DetailItem = ({ item, setShow, setWarehouseItemInfo }: DetailItemProps) =>
                 alt="Delete"
                 onClick={() => {
                     setShow(true);
-                    setWarehouseItemInfo({
+                    setWarehouseItemInfo!({
                         id: id,
                         name: itemName
                     });
