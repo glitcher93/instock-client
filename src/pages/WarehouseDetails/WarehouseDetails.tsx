@@ -8,20 +8,17 @@ import TabletHeadings from '../../components/TabletHeadings';
 import ItemList from '../../components/ItemList';
 import { deleteItemFromWarehouse, getInventoryForWarehouse, getSingleWarehouse } from '../../utils/apiFunctions';
 import DeleteModal from '../../components/DeleteModal';
-import { ContactObj, ItemStateObj, WarehouseStateObject } from '../../utils/interfaces';
+import { ContactObj, Info, ItemStateObj, WarehouseStateObject } from '../../utils/interfaces';
 
 const WarehouseDetails = () => {
 
     const { warehouseId } = useParams();
 
-    const [warehouse, setWarehouse] = useState<WarehouseStateObject>({} as WarehouseStateObject);
-    const [contact, setContact]  = useState<ContactObj>({} as ContactObj);
+    const [warehouse, setWarehouse] = useState<WarehouseStateObject | undefined>();
+    const [contact, setContact]  = useState<ContactObj | undefined>();
     const [warehouseInventory, setWarehouseInventory] = useState<ItemStateObj[]>([]);
     const [show, setShow] = useState(false);
-    const [warehouseItemInfo, setWarehouseItemInfo] = useState({
-        id: "",
-        name: ""
-    })
+    const [warehouseItemInfo, setWarehouseItemInfo] = useState<Info | undefined>();
 
     useEffect(() => {
         getSingleWarehouse(setWarehouse, setContact, warehouseId!);
@@ -37,8 +34,8 @@ const WarehouseDetails = () => {
         setShow(false);
     }
 
-    const {id, name, address, city, country } = warehouse;
-    const { name: contactName, position, phone, email } = contact
+    const {id, name, address, city, country } = warehouse!;
+    const { name: contactName, position, phone, email } = contact!;
 
     return (
         <main 
