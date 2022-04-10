@@ -4,13 +4,14 @@ import arrow from "../../assets/icons/arrow_back-24px.svg";
 import WarehouseForm from '../../components/WarehouseForm/WarehouseForm';
 import { useEffect, useState } from 'react';
 import { getSingleWarehouse } from '../../utils/apiFunctions';
+import { ContactObj, WarehouseStateObject } from '../../utils/interfaces';
 
 const EditWarehouse = () => {
 
     const { warehouseId } = useParams();
 
-    const [warehouse, setWarehouse] = useState({});
-    const [contact, setContact] = useState({});
+    const [warehouse, setWarehouse] = useState<WarehouseStateObject | undefined>();
+    const [contact, setContact] = useState<ContactObj | undefined>();
 
     useEffect(() => {
         getSingleWarehouse(setWarehouse, setContact, warehouseId!)
