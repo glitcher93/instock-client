@@ -7,9 +7,7 @@ import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import ErrorMessage from "../ErrorMessage";
 import { WarehouseFormProps } from "../../utils/interfaces";
 
-const WarehouseForm = (props: WarehouseFormProps) => {
-
-    const { warehouse, contact } = props;
+const WarehouseForm = ({ warehouse, contact }: WarehouseFormProps) => {
 
     const { warehouseId } = useParams();
     const navigate = useNavigate();
@@ -163,17 +161,19 @@ const WarehouseForm = (props: WarehouseFormProps) => {
     }
 
     useEffect(() => {
-        if (warehouseId) {
-            setWarehouseName(warehouse!.name)
-            setWarehouseAddress(warehouse!.address)
-            setWarehouseCity(warehouse!.city)
-            setWarehouseCountry(warehouse!.country)
-            setContactPerson(contact!.name)
-            setContactPosition(contact!.position)
-            setContactPhone(contact!.phone)
-            setContactEmail(contact!.email)
+        if (warehouse && contact) {
+            const { name, address, city, country } = warehouse;
+            const { name: contactName, position, phone, email } = contact
+            setWarehouseName(name)
+            setWarehouseAddress(address)
+            setWarehouseCity(city)
+            setWarehouseCountry(country)
+            setContactPerson(contactName)
+            setContactPosition(position)
+            setContactPhone(phone)
+            setContactEmail(email)
         }
-    }, [warehouseId, contact, warehouse])
+    }, [contact, warehouse])
 
     return (
         <form 
@@ -371,9 +371,9 @@ const WarehouseForm = (props: WarehouseFormProps) => {
                     />
                 </Link>
                 <Button 
-                text={"Add Warehouse"}
-                image={Add}
-                altText="Add"
+                text={warehouseId ? "Save" : "Add Warehouse"}
+                image={warehouseId ? false : Add}
+                altText={warehouseId ? "" : "Add"}
                 />
             </div>
         </form>

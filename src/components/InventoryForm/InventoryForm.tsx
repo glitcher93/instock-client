@@ -7,9 +7,7 @@ import { getAllWarehouses, editItem, postNewItem } from "../../utils/apiFunction
 import ErrorMessage from "../ErrorMessage";
 import { InvFormProp, WarehouseStateObject } from "../../utils/interfaces";
 
-const InventoryForm = (props: InvFormProp) => {
-
-    const { item } = props
+const InventoryForm = ({ item }: InvFormProp) => {
 
     const { itemId } = useParams();
     const navigate = useNavigate();
@@ -30,13 +28,14 @@ const InventoryForm = (props: InvFormProp) => {
     const [show, setShow] = useState(true);
 
     useEffect(() => {
-        if (itemId) {
-            setItemTitle(item!.itemName)
-            setItemDescription(item!.description)
-            setItemCategory(item!.category)
-            setItemStatus(item!.status)
-            setItemQuantity(String(item!.quantity))
-            setItemWarehouse(item!.warehouseName)
+        if (item) {
+            const { itemName, description, category, status, quantity, warehouseName } = item!
+            setItemTitle(itemName)
+            setItemDescription(description)
+            setItemCategory(category)
+            setItemStatus(status)
+            setItemQuantity(String(quantity))
+            setItemWarehouse(warehouseName)
         }
         getAllWarehouses(setWarehouses);
     }, [item, itemId])
@@ -193,7 +192,7 @@ const InventoryForm = (props: InvFormProp) => {
                         className={`inventory-form__input inventory-form__input--textarea ${descriptionRequired ? "inventory-form__input--error" : ""}`}
                         id="description"
                         name="description"
-                        defaultValue={item ? itemDescription : itemDescription}
+                        defaultValue={itemId ? itemDescription : itemDescription}
                         onChange={handleOnChange}
                         placeholder="Please enter a brief item description..." 
                         ></textarea>
@@ -215,7 +214,7 @@ const InventoryForm = (props: InvFormProp) => {
                         onChange={handleOnChange}
                         defaultValue="" 
                         >
-                            <option value="" disabled>{item ? itemCategory : "Please Select"}</option>
+                            <option value="" disabled>{itemId ? itemCategory : "Please Select"}</option>
                             <option value="Electronics">Electronics</option>
                             <option value="Gear">Gear</option>
                             <option value="Apparel">Apparel</option>
@@ -324,7 +323,7 @@ const InventoryForm = (props: InvFormProp) => {
                         name="warehouseName"
                         defaultValue=""
                         >
-                            <option value="" disabled>{item ? itemWarehouse : "Please Select"}</option>
+                            <option value="" disabled>{itemId ? itemWarehouse : "Please Select"}</option>
                             {warehouses.map(warehouse => {
                                 return <option 
                                         key={warehouse.id}
@@ -349,8 +348,9 @@ const InventoryForm = (props: InvFormProp) => {
                     />
                 </Link>
                 <Button 
-                text={item ? "Save" : "Add Item"}
-                image={item ? false : Add}
+                text={itemId ? "Save" : "Add Item"}
+                image={itemId ? false : Add}
+                altText={itemId ? "" : "Add"}
                 />
             </div>
         </form>
