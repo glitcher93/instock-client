@@ -11,7 +11,7 @@ const InventoryDetails = () => {
 
     const { itemId } = useParams();
 
-    const [item, setItem] = useState<ItemStateObj | undefined>();
+    const [item, setItem] = useState<ItemStateObj | undefined>({} as ItemStateObj);
 
     useEffect(() => {
         getSingleItem(itemId!, setItem)

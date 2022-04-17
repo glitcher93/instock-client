@@ -14,8 +14,8 @@ const WarehouseDetails = () => {
 
     const { warehouseId } = useParams();
 
-    const [warehouse, setWarehouse] = useState<WarehouseStateObject | undefined>();
-    const [contact, setContact]  = useState<ContactObj | undefined>();
+    const [warehouse, setWarehouse] = useState<WarehouseStateObject | undefined>({} as WarehouseStateObject);
+    const [contact, setContact]  = useState<ContactObj | undefined>({} as ContactObj);
     const [warehouseInventory, setWarehouseInventory] = useState<ItemStateObj[]>([]);
     const [show, setShow] = useState(false);
     const [warehouseItemInfo, setWarehouseItemInfo] = useState<Info | undefined>();
