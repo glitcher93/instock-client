@@ -2,7 +2,7 @@ import axios from "axios"
 import { Dispatch, SetStateAction } from "react";
 import { ContactObj, ItemObj, ItemStateObj, WarehouseObject, WarehouseStateObject } from "./interfaces";
 
-const apiURL = process.env.REACT_API_URL || 'http://localhost:8080/'
+const apiURL = process.env.REACT_APP_API_URL || 'http://localhost:8080/'
 
 export const getAllWarehouses = (stateFn: Dispatch<SetStateAction<WarehouseStateObject[]>>) => {
     axios
